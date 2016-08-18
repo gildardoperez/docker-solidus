@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+    db:
+        extends:
+            file: ./docker-common.yml
+            service: db_base
+
+    ruby:
+        extends:
+            file: ./docker-common.yml
+            service: ruby_base
+        command: bash -c 'while true; do sleep 1000; done'
+        links:
+            - db
+

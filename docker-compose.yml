@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+    db:
+        extends:
+            file: ./docker-common.yml
+            service: db_base
+
+    ruby:
+        extends:
+            file: ./docker-common.yml
+            service: ruby_base
+        links:
+            - db
+        command: bundle exec rails s
+
+    web:
+        image: nginx
+        links:
+            - ruby
+        ports:
+            - "7100:80"
+        volumes_from:
+            - ruby
+        volumes:
+            - "./conf/nginx/sites-enabled:/etc/nginx/sites-enabled:ro"
+            - "./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+

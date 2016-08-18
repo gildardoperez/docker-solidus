@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    ruby_base:
+        image: ruby
+        volumes:
+            - ./src:/src
+        working_dir: /src
+
+    db_base:
+        image: postgres
+        environment:
+            - POSTGRES_PASSWORD=solidus
+            - POSTGRES_USER=solidus
+            - POSTGRES_DB=solidus
+        volumes:
+            - ./conf/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro
+

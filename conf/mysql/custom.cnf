@@ -1,0 +1,5 @@
+[global]
+time_zone='Europe/Berlin'
+
+[mysqld]
+sql_mode=NO_ENGINE_SUBSTITUTION
